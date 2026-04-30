@@ -4,9 +4,10 @@ import { createContext } from "react"
 export interface TaskContextType {
   handleComplete: (id: number) => void
   handleDelete: (id: number) => void
-  tasks?: Task[]
+  handleFilters: (filter: "all" | "pending" | "complete") => void
   loading: boolean
+  filter: string
+  filtered: Task[]
 }
 
 export const TaskContext = createContext<TaskContextType | undefined>(undefined)
-

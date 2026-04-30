@@ -14,7 +14,9 @@ const TaskCard = ({ task }: TaskCardProps) => {
         checked={task.completed}
         onChange={() => handleComplete(task.id)}
       />
-      <span className="w-full">{task.title}</span>
+      <span className={`w-full ${task.completed && "line-through"}`}>
+        {task.title}
+      </span>
       <button
         className="cursor-pointer group"
         onClick={() => handleDelete(task.id)}
