@@ -11,18 +11,38 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({
   const [filter, setFilter] = useState("all")
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos?_limit=10.")
-      .then((response) => response.json())
-      .then((json) => {
-        setTasks(json)
-        setFiltered(json)
+    function getTasks() {
+      const storage = localStorage.getItem("tasks")
+      const parsedStorage = storage ? JSON.parse(storage) : []
+
+      if (parsedStorage.length > 0) {
+        setTasks(parsedStorage)
         setLoading(false)
-      })
-      .catch((error) => {
-        console.error("Error:", error)
-      })
-      .finally(() => setLoading(false))
+        return
+      }
+
+      fetch("https://jsonplaceholder.typicode.com/todos?_limit=10.")
+        .then((response) => response.json())
+        .then((json) => {
+          setTasks(json)
+          setFiltered(json)
+          setLoading(false)
+        })
+        .catch((error) => {
+          console.error("Error:", error)
+        })
+        .finally(() => setLoading(false))
+    }
+
+    getTasks()
   }, [])
+
+  useEffect(() => {
+    console.log(tasks)
+    if (!loading) {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+  }, [tasks, loading])
 
   useEffect(() => {
     if (filter === "all") {
