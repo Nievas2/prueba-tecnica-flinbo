@@ -40,7 +40,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     console.log(tasks)
     if (!loading) {
-      localStorage.setItem("tasks", JSON.stringify(tasks));
+      localStorage.setItem("tasks", JSON.stringify(tasks))
     }
   }, [tasks, loading])
 

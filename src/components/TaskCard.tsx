@@ -8,7 +8,7 @@ interface TaskCardProps {
 const TaskCard = ({ task }: TaskCardProps) => {
   const { handleComplete, handleDelete } = useTasks()
   return (
-    <div className="flex p-2 gap-4 bg-blue-950 rounded-md">
+    <div className="flex p-2 gap-4 bg-sky-300 text-black dark:bg-blue-950 dark:text-white rounded-md">
       <input
         type="checkbox"
         checked={task.completed}
